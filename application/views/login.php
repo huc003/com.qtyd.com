@@ -42,50 +42,19 @@ $this->load->helpers('url');
             max-width: 450px;
         }
     </style>
-    <!--<script>
-        $(document)
-            .ready(function() {
-                $('.ui.form')
-                    .form({
-                        fields: {
-                            email: {
-                                identifier  : 'email',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your e-mail'
-                                    },
-                                    {
-                                        type   : 'email',
-                                        prompt : 'Please enter a valid e-mail'
-                                    }
-                                ]
-                            },
-                            password: {
-                                identifier  : 'password',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your password'
-                                    },
-                                    {
-                                        type   : 'length[6]',
-                                        prompt : 'Your password must be at least 6 characters'
-                                    }
-                                ]
-                            }
-                        }
-                    })
-                ;
-            })
-        ;
-    </script>-->
+
 </head>
 <body>
-<div class="ui middle aligned center aligned grid">
+<div class="ui success message hidden" id="message" style="position: fixed;margin-top:10px;line-height: 30px;width: 100%;">
+    <i class="close icon"></i>
+    <div class="header"><?php if($message){echo $message;}?>。 </div>
+    <input type="hidden" value="<?php if($is_show){echo $is_show;}?>" id="is_show">
+<!--<p>现在你可以用你选择的用户名登录了</p>-->
+</div>
+<div class="ui middle aligned center aligned grid" >
     <div class="column">
         <h2 class="ui teal image header">
-            <img src="images/logo.png" class="image">
+            <img src="../images/logo.png" class="image">
             <div class="content">
                 祺天优贷后台系统
             </div>
@@ -96,13 +65,13 @@ $this->load->helpers('url');
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="user icon"></i>
-                        <input type="text" name="username" placeholder="Username">
+                        <input type="text" name="username" placeholder="Username" value="<?php if($username){echo $username;}?>">
                     </div>
                 </div>
                 <div class="field">
                     <div class="ui left icon input">
                         <i class="lock icon"></i>
-                        <input type="password" name="password" placeholder="Password">
+                        <input type="password" name="password" placeholder="Password" value="">
                     </div>
                 </div>
                 <input type="submit" value="Login" class="ui fluid large teal submit button">
@@ -110,9 +79,27 @@ $this->load->helpers('url');
             <div class="ui error message"></div>
         </form>
         <div class="ui message">
-            New to us? <a href="#">Sign Up</a>
+            Copyright ©2018 Tiger95
         </div>
     </div>
 </div>
+<script>
+$(function () {
+
+    var is_show = $('#is_show').val();
+    if(is_show=="1"){
+        $("#message").slideDown();
+    }
+
+    $('.message .close').bind('click', function() {
+        $("#message").hide();
+    });
+
+    console.log($('#message').width());
+    console.log($(window).width());
+    console.log($(window).height()); //浏览器时下窗口可视区域高度
+    console.log($(document).height()); //浏览器时下窗口文档的高度
+})
+</script>
 </body>
 </html>
