@@ -6,12 +6,17 @@
  * Date: 2018/5/3
  * Time: 14:14
  */
-class My_Controller extends CI_Controller
+class MY_Controller extends CI_Controller
 {
-
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->library('session');
+        if (!session_id()) session_start();
+    }
 }
 
-class Admin_Controller extends My_Controller{
+class Admin_Controller extends MY_Controller{
 
     public function __construct()
     {

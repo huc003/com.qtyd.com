@@ -23,7 +23,6 @@ class User extends Admin_Controller
      * Description:登录方法
      */
     public function login(){
-
         $username = $this->input->post('username');
         $password = $this->input->post('password');
 
@@ -42,10 +41,47 @@ class User extends Admin_Controller
             exit;
         }
 
-        $this->mdata['message'] = $username;
-        redirect('welcome/indexPage');
+        $_SESSION['tb1'] = '';
+        $_SESSION['tb2'] = '';
+        $_SESSION['controller'] = '';
+
+        //用户登录信息
+        $_SESSION['username']=$username;
+        redirect('welcome/main');
         exit;
 
+    }
+
+    /**
+     * Created by PhpStorm.
+     * User: huc
+     * Date: 2018/5/4
+     * Time: 9:53
+     * Description:客户列表
+     */
+    public function client_list(){
+
+
+//        $url_info = $this->geturl($_SERVER['QUERY_STRING'],$this->key_url_md_5);//接收所有参数
+//
+//        $tb1=$url_info['tb1'];//解密对应参数
+//        $tb2 = $url_info['tb2'];
+//
+//        log_message('info',$tb1);
+//        log_message('info',$tb2);
+
+        $this->load->model('admin/user_model');
+        $r = $this->user_model->get_client_list();
+
+        $this->mdata['client_list'] = $r;
+        $this->_view('admin/client_list');
+    }
+
+
+    public function out(){
+        session_destroy();
+        redirect('welcome/index');
+        exit;
     }
 
 }

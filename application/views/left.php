@@ -6,6 +6,7 @@
  * Time: 18:11
  * Description:
  */
+$this->load->library('session');
 ?>
 <!doctype html>
 <html lang="en">
@@ -50,17 +51,22 @@
                 $('#content3').slideToggle();
             })
         })
+
+        function a(id) {
+            $('#'+id).addClass('active');
+        }
+
     </script>
 </head>
 <body>
 <div class="ui styled accordion">
-    <div class="title" id="cd1"><i class="dropdown icon"></i>菜单1</div>
-    <div class="content" id="content1">
+    <div class="title" id="cd1"><i class="dropdown icon"></i>客户服务</div>
+    <div class="content <?php if($_SESSION['tb1']=='content1'){echo 'active';}?>" id="content1">
         <p class="transition">
             <div class="ui vertical pointing menu">
-                <a class="item" href="right?controller=/admin/user/login" target="iframe_a">Home </a>
+                <a class="item <?php if($_SESSION['tb2']=='content1-a1'){echo 'active';}?>" onclick="a('content1-a1')" id="content1-a1" href="right?controller=/admin/user/client_list&tb1=content1&tb2=content1-a1" target="iframe_a">客户列表 </a>
                 <a class="item">Messages </a>
-                <a class="item active">好友 </a>
+                <a class="item">好友 </a>
             </div>
         </p>
     </div>
@@ -68,7 +74,7 @@
     <div class="content" id="content2">
         <p class="transition">
             <div class="ui vertical pointing menu">
-                <a class="item active">Home </a>
+                <a class="item">Home </a>
                 <a class="item">Messages </a>
                 <a class="item">好友 </a>
             </div>
@@ -80,7 +86,7 @@
             <div class="ui vertical pointing menu">
                 <a class="item">Home </a>
                 <a class="item">Messages </a>
-                <a class="item active">好友 </a>
+                <a class="item">好友 </a>
             </div>
         </p>
     </div>
