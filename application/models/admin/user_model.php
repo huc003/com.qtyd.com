@@ -9,8 +9,8 @@
  */
 class user_model extends MY_Model
 {
-    public function get_client_list(){
-        $sql = 'select * from dw_user limit 10';
+    public function get_client_list($data){
+        $sql = 'select user_id,username,nick_name,addtime from dw_user limit '.$data['offset'].','.$data['limit'];
         return $this->query_sql($sql);
     }
 }

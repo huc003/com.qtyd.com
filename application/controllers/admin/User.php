@@ -12,7 +12,7 @@ class User extends Admin_Controller
     public function __construct()
     {
         parent::__construct();
-
+        $this->load->model('admin/user_model');
     }
 
     /**
@@ -70,10 +70,29 @@ class User extends Admin_Controller
 //        log_message('info',$tb1);
 //        log_message('info',$tb2);
 
-        $this->load->model('admin/user_model');
-        $r = $this->user_model->get_client_list();
+        $this->load->library('pagination');
+
+        $limit = 15;
+        $offset = $this->input->get('per_page');
+        if ($offset == '') $offset = 0;
+
+        $data = array(
+            "limit" => $limit,
+            "offset" => $offset
+        );
+
+        $r = $this->user_model->get_client_list($data);
 
         $this->mdata['client_list'] = $r;
+
+        $getparam = spell_get();
+        $config['base_url'] = site_url('admin/user/client_list') . "?$getparam";
+        $config['total_rows'] = 30;
+        $config['per_page'] = $limit;
+        $config['cur_page'] = $offset;
+        $config['page_query_string'] = TRUE;
+        $this->pagination->initialize($config);
+
         $this->_view('admin/client_list');
     }
 

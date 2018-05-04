@@ -22,6 +22,7 @@ class Admin_Controller extends MY_Controller{
     {
         parent::__construct();
         $this->load->helpers('url');
+        $this->load->helpers('common');
     }
 
     var $mdata = array();

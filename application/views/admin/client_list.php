@@ -6,6 +6,7 @@
  * Time: 9:53
  * Description:
  */
+$this->load->library('pagination');
 ?>
 <!doctype html>
 <html lang="en">
@@ -66,47 +67,51 @@
     </div>
 </div>
 </form>
-<?php //foreach($client_list as $rs){?>
-<!---->
-<!--    <div>--><?php //echo $rs->user_id;?><!--</div>-->
-<!---->
-<?php //}?>
+
 <div style="padding: 5px;">
-    <table class="ui green table">
+    <table class="ui green striped table">
         <thead>
-        <tr><th>Food</th>
-            <th>卡路里</th>
-            <th>蛋白质</th>
-        </tr></thead><tbody>
-        <tr>
-            <td>苹果</td>
-            <td>200</td>
-            <td>0g</td>
-        </tr>
-        <tr>
-            <td>Orange</td>
-            <td>310</td>
-            <td>0g</td>
-        </tr>
+            <tr>
+                <th>用户ID</th>
+                <th>用户名</th>
+                <th>昵称</th>
+                <th>注册时间</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php foreach($client_list as $rs){?>
+            <tr>
+                <td><?php echo $rs->user_id;?></td>
+                <td><?php echo $rs->username;?></td>
+                <td><?php echo $rs->nick_name;?></td>
+                <td><?php echo date("Y-m-d H:i:s",$rs->addtime);?></td>
+            </tr>
+        <?php }?>
+<!--        <tr>-->
+<!--            <td>Orange</td>-->
+<!--            <td>310</td>-->
+<!--            <td>0g</td>-->
+<!--        </tr>-->
         </tbody>
         <tfoot>
             <tr>
-                <th colspan="3">
+                <th colspan="4">
                     <div class="ui left floated pagination ">
                         <div class="ui left floated small primary labeled icon button" style="padding-top:13.5px;padding-bottom:13.5px;"><i class="user icon"></i> 添加用户 </div>
                     </div>
-                    <div class="ui right floated pagination menu">
-                        <a class="icon item">
-                            <i class="left chevron icon"></i>
-                        </a>
-                        <a class="item">1</a>
-                        <a class="item">2</a>
-                        <a class="item">3</a>
-                        <a class="item">4</a>
-                        <a class="icon item">
-                            <i class="right chevron icon"></i>
-                        </a>
-                    </div>
+<!--                    <div class="ui right floated pagination menu">-->
+<!--                        <a class="icon item">-->
+<!--                            <i class="left chevron icon"></i>-->
+<!--                        </a>-->
+<!--                        <a class="item">1</a>-->
+<!--                        <a class="item">2</a>-->
+<!--                        <a class="item">3</a>-->
+<!--                        <a class="item">4</a>-->
+<!--                        <a class="icon item">-->
+<!--                            <i class="right chevron icon"></i>-->
+<!--                        </a>-->
+                        <?php echo $this->pagination->create_admin_links(); ?>
+<!--                    </div>-->
                 </th>
             </tr>
         </tfoot>
