@@ -441,18 +441,21 @@ class MY_Pagination extends CI_Pagination {
 //        }
 
         // Render the "Last" link
-//        if ($this->last_link !== FALSE AND ($this->cur_page + $this->num_links) < $num_pages)
-//        {
-//            if ($this->use_page_numbers)
-//            {
-//                $i = $num_pages;
-//            }
-//            else
-//            {
-//                $i = (($num_pages * $this->per_page) - $this->per_page);
-//            }
+        if ($this->last_link !== FALSE AND ($this->cur_page + $this->num_links) < $num_pages)
+        {
+            if ($this->use_page_numbers)
+            {
+                $i = $num_pages;
+            }
+            else
+            {
+                $i = (($num_pages * $this->per_page) - $this->per_page);
+            }
 //            $output .= $this->last_tag_open.'<a '.$this->anchor_class.'href="'.$this->base_url.$this->prefix.$i.$this->suffix.'">'.$this->last_link.'</a>'.$this->last_tag_close;
-//        }
+            $output .='<a class="icon item" href="'.$this->base_url.$this->prefix.$i.$this->suffix.'"><i class="right chevron icon"></i></a>';
+
+
+        }
 
         // Kill double slashes.  Note: Sometimes we can end up with a double slash
         // in the penultimate link so we'll kill all double slashes.

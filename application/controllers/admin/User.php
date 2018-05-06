@@ -83,11 +83,13 @@ class User extends Admin_Controller
 
         $r = $this->user_model->get_client_list($data);
 
-        $this->mdata['client_list'] = $r;
+        $this->mdata['client_list'] = $r['list'];
+
+        log_message('info','count--'.$r['count']);
 
         $getparam = spell_get();
         $config['base_url'] = site_url('admin/user/client_list') . "?$getparam";
-        $config['total_rows'] = 30;
+        $config['total_rows'] = $r['count'];
         $config['per_page'] = $limit;
         $config['cur_page'] = $offset;
         $config['page_query_string'] = TRUE;
